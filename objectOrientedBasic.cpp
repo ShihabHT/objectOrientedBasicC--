@@ -84,7 +84,7 @@ public:
     int getDick(){
         return dick;
     }
-    void setHair(int h){
+    void setHair(string h){
         hair = h;
     }
     string getHair(){
