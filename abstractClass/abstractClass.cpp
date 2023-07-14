@@ -2,8 +2,21 @@
 
 using namespace std;
 
+/*
+  abstraction means hiding complex things behind a procedure
+  that makes then look simple. Like  we can send a message on
+  out smartphones but we don't need to worry about the 
+  processes it goes through.
+  
+  virtual keyword is used to make it obligatory to implement
+  this method whichever class wants to inherit this class. 
+  compiler will throw an error if this function is not implemented.
+  * Childclass = subclass = derived class
+  * parentClass = base class
+*/
+
 class AbstractPhone{
-    virtual void makeCall()=0;
+    virtual void makeCall()=0; 
     virtual void sendText()=0;
 };
 class Phone:AbstractPhone{

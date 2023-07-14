@@ -16,6 +16,9 @@ using namespace std;
   objects which works as a template. A 'Book' class is like a
   specification or blueprint of a book. And an object is an instance
   of that blueprint or that class. So the object is an actual book.
+  Properties and methods or behaviour are class members of the class.
+  check this video on OOP of CodeBeauty on youtube,
+  "https://www.youtube.com/watch?v=wN0x9eZLix4"
 */
 
 //CONSTRUCTOR
@@ -24,6 +27,8 @@ using namespace std;
   an object gets created. We can create a constructor by creating a
   function with the class name. This function has no return type cause
   constructor function does not have one.
+  3 properties of a constructor, 1. has no return type, 2. same name as
+  its class, 3. must be public
 */
 
 class Phone{

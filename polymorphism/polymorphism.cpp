@@ -36,8 +36,15 @@ int main(){
     Employee* e1 = &d;
     Employee* e2 = &t;
 
-    e1->work();
-    e2->work();
+    e1->work(); //'->' is symbol is used when we want to access members using a pointer
+    e2->work(); //the symbol automatically appears when we type '.' like - e1.work()
+
+/*
+  the most common use of polymorphism is when a parent class reference is
+  used to refer to a child class.
+  Notice the work() method in parent class, Employee, is virtual. it tells please check if
+  there is a implementation of the same method in the derived classes if so use that.
+*/
 
     return 0;
 }
