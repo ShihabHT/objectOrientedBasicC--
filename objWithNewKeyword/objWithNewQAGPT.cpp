@@ -1,11 +1,133 @@
-//GPT
 /*
+Qs: is it possible to make vector of constructor and methods
+
+ChatGPT:
+Yes, you can create a vector of constructor and method pointers in C++. Here's how you can do it for
+the NumArray class:
+*/
+
+#include <iostream>
+#include <vector>
+#include <functional>
+
+class NumArray {
+public:
+    NumArray(std::vector<int>& nums) {
+        prefix_sum.push_back(0);
+        for (int num : nums) {
+            prefix_sum.push_back(prefix_sum.back() + num);
+        }
+    }
+
+    int sumRange(int left, int right) {
+        return prefix_sum[right + 1] - prefix_sum[left];
+    }
+
+private:
+    std::vector<int> prefix_sum;
+};
+
+int main() {
+    using Method = std::function<int(NumArray&, int, int)>;
+
+    std::vector<Method> methods;
+    methods.push_back([](NumArray& obj, int left, int right) { return obj.sumRange(left, right); });
+
+    std::vector<int> nums = {-2, 0, 3, -5, 2, -1};
+    std::vector<std::vector<int>> queries = {{0, 2}, {2, 5}, {0, 5}};
+
+    std::vector<int> results;
+    NumArray numArray(nums);
+    for (const auto& query : queries) {
+        int left = query[0];
+        int right = query[1];
+        int result = methods[0](numArray, left, right);
+        results.push_back(result);
+    }
+
+    for (int result : results) {
+        std::cout << result << " ";
+    }
+
+    return 0;
+}
+/*
+In this code, we're using std::function to create a type alias Method for function pointers. We then
+create a vector methods to hold the constructor and method pointers. In this example, we're only
+storing the sumRange method, but you can extend it to include the constructor as well.
+
+The lambda function inside the methods vector calls the respective method on the NumArray object. This
+approach allows you to store and invoke methods dynamically using function pointers.
+//Response Ends........
+
+
+
+Qs: The following is the complete description of the problem 
+Given an integer array nums, handle multiple queries of the following type:
+
+Calculate the sum of the elements of nums between indices left and right inclusive where left <= right.
+Implement the NumArray class:
+
+NumArray(int[] nums) Initializes the object with the integer array nums.
+int sumRange(int left, int right) Returns the sum of the elements of nums between indices left and right inclusive (i.e. nums[left] + nums[left + 1] + ... + nums[right]).
+ 
+
+Example 1:
+
+Input
+["NumArray", "sumRange", "sumRange", "sumRange"]
+[[[-2, 0, 3, -5, 2, -1]], [0, 2], [2, 5], [0, 5]]
+Output
+[null, 1, -1, -3]
+
+Explanation
+NumArray numArray = new NumArray([-2, 0, 3, -5, 2, -1]);
+numArray.sumRange(0, 2); // return (-2) + 0 + 3 = 1
+numArray.sumRange(2, 5); // return 3 + (-5) + 2 + (-1) = -1
+numArray.sumRange(0, 5); // return (-2) + 0 + 3 + (-5) + 2 + (-1) = -3
+ 
+
+Constraints:
+
+1 <= nums.length <= 104
+-105 <= nums[i] <= 105
+0 <= left <= right < nums.length
+At most 10^4 calls will be made to sumRange.
+
+the definition of the class is like the following
+class NumArray {
+public:
+    vector<int> &n; //reference has been used, so the vector will not be copied
+    NumArray(vector<int>& nums):n(nums){ //this is how to assign value in variable taken as reference
+        for(int i = 1; i < n.size(); i++){
+            n[i] += n[i-1];
+        }
+    }
+    
+    int sumRange(int left, int right) {
+        if(left == 0) return n[right];
+        return n[right]-n[left-1];
+    }
+};
+
+
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray* obj = new NumArray(nums);
+ * int param_1 = obj->sumRange(left,right);
+ 
+
+my question is how would i give this "["NumArray", "sumRange", "sumRange", "sumRange"]
+[[[-2, 0, 3, -5, 2, -1]], [0, 2], [2, 5], [0, 5]]" as input,
+//Qustions Ends............
+
+
+ChatGPT:
 To simulate the given input and test the NumArray class, you would perform the following steps in C++:
 
-Include the necessary headers.
-Define the NumArray class.
-Implement the constructor and methods as described.
-In the main function, instantiate the NumArray object and call its methods with the given input.
+- Include the necessary headers.
+- Define the NumArray class.
+- Implement the constructor and methods as described.
+- In the main function, instantiate the NumArray object and call its methods with the given input.
 Here's how you can do that:
 */
 
