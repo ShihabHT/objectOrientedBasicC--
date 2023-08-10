@@ -58,7 +58,65 @@ storing the sumRange method, but you can extend it to include the constructor as
 
 The lambda function inside the methods vector calls the respective method on the NumArray object. This
 approach allows you to store and invoke methods dynamically using function pointers.
+*/
 //Response Ends........
+
+
+//Qs: 
+using Method = std::function<int(NumArray&, int, int)>; 
+//explain this line
+
+/*
+ChatGPT:
+Certainly! The line using Method = std::function<int(NumArray&, int, int)>; defines a type alias named
+Method using the using keyword in C++. This type alias defines a new type that represents a function
+that takes specific arguments and returns a specific result.
+
+Let's break down the components of this line:
+
+1. using: The using keyword is used in C++ to create type aliases. It allows you to define a new name for
+an existing type, making code more readable and providing more context to the types being used.
+
+2. Method: This is the name you're giving to the new type alias. You can choose any valid identifier as the
+name.
+
+3. std::function<int(NumArray&, int, int)>: This part defines the underlying type of the alias. In this case,
+it specifies that Method represents a std::function object that takes three arguments:
+
+ - The first argument is a reference to a NumArray object (NumArray&).
+ - The second argument is an int representing the left index.
+ - The third argument is an int representing the right index.
+   The std::function part indicates that you're defining a function object that can store any callable object
+   (function, lambda, functor, etc.) that matches the specified signature.
+So, when you use Method in your code, it means you're referring to a type that represents a function taking
+a NumArray&, an int left, and an int right as arguments and returning an int.
+
+This approach is useful when you want to store function-like objects (methods, lambdas, etc.) in containers
+or pass them around as arguments while keeping the function signature consistent. In your case, the methods
+vector holds instances of functions that match the signature of the sumRange method in the NumArray class.
+//Response Ends...........
+
+
+
+Qs:
+would the line be the same if i wrote this line before the main() function, "using namespace std;"
+
+ChatGPT:
+Yes, the line using namespace std; would not have any impact on the line using Method = std::function<int(NumArray&, int, int)>;.
+Both lines are independent of each other and have different purposes.
+
+  The line using namespace std; is used to bring all the symbols from the std namespace into the current scope.
+This can save you from having to write std:: before standard library symbols like vector, string, etc. However,
+it's generally considered a better practice to avoid using using namespace std; in global scope to prevent
+potential naming conflicts and to make the code more clear about where the symbols are coming from.
+
+  The line using Method = std::function<int(NumArray&, int, int)>; is defining a type alias named Method for the
+std::function type with the specified signature. This line is about defining a custom type and doesn't depend
+on whether you're using namespace std; or not.
+
+  In short, the two lines are unrelated, and whether you include the using namespace std; line before or after the
+using Method line won't affect how the type alias is defined.
+//Responde Ends............
 
 
 
